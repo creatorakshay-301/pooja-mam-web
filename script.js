@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('[data-filter]');
   const productCards = document.querySelectorAll('.product-card');
 
+  const isGitHubPages = location.hostname.endsWith('.github.io');
   const STORAGE_KEY = 'pooja-rajputt-cart';
   let cart;
   try {
@@ -78,16 +79,24 @@ document.addEventListener('DOMContentLoaded', () => {
       cartItemsList.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
       cartSubtotal.textContent = formatCurrency(0);
       if (checkoutForm) checkoutForm.querySelector('button[type="submit"]').disabled = true;
-      if (cartNote) cartNote.textContent = 'Add spiritual essentials to begin your ritual shopping.';
+      if (cartNote) {
+        cartNote.textContent = isGitHubPages
+          ? 'Online order requests are unavailable on this free static website.'
+          : 'Add spiritual essentials to begin your ritual shopping.';
+      }
       return;
     }
 
-    if (checkoutForm) checkoutForm.querySelector('button[type="submit"]').disabled = false;
+    if (checkoutForm) {
+      checkoutForm.querySelector('button[type="submit"]').disabled = isGitHubPages;
+    }
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     cartSubtotal.textContent = formatCurrency(total);
 
     if (cartNote) {
-      cartNote.textContent = `${getCartItemCount()} item${getCartItemCount() === 1 ? '' : 's'} selected`;
+      cartNote.textContent = isGitHubPages
+        ? 'Your cart is saved in this browser; online order requests are unavailable.'
+        : `${getCartItemCount()} item${getCartItemCount() === 1 ? '' : 's'} selected`;
     }
 
     cartItemsList.innerHTML = cart
@@ -393,6 +402,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (checkoutForm) {
     checkoutForm.addEventListener('submit', submitOrder);
+  }
+
+  if (isGitHubPages) {
+    if (consultationForm) {
+      consultationForm.querySelector('button[type="submit"]').disabled = true;
+      showFormMessage(consultationForm, 'error', 'Online consultation bookings are unavailable on this free static website. Please contact Pooja Rajputt directly.');
+    }
+    if (contactForm) {
+      contactForm.querySelector('button[type="submit"]').disabled = true;
+      showFormMessage(contactForm, 'error', 'Online contact messages are unavailable on this free static website. Please contact Pooja Rajputt directly.');
+    }
   }
 
   if (searchInput) {
