@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin | Pooja Rajputt</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="admin.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container navbar admin-navbar">
+        <a href="/" class="brand" aria-label="Pooja Rajputt home">
+          <span class="brand-mark">P</span>
+          <span class="brand-copy">
+            <span class="brand-name">Pooja Rajputt</span>
+            <span class="brand-role">Admin Dashboard</span>
+          </span>
+        </a>
+        <button id="admin-logout" class="secondary-btn" type="button" hidden>Sign Out</button>
+      </div>
+    </header>
+
+    <main class="container admin-main">
+      <section id="admin-login" class="admin-login">
+        <span class="eyebrow">Private Area</span>
+        <h1 class="heading">Admin Sign In</h1>
+        <p class="lead">Sign in to view consultation requests, messages, and order requests.</p>
+        <form id="admin-login-form" class="form-box">
+          <div class="form-control">
+            <label for="admin-password">Admin Password</label>
+            <input id="admin-password" name="password" type="password" autocomplete="current-password" maxlength="200" required />
+          </div>
+          <button class="primary-btn" type="submit">Sign In</button>
+          <p id="admin-login-status" class="admin-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="admin-dashboard" hidden>
+        <div class="admin-heading">
+          <div>
+            <span class="eyebrow">Private Area</span>
+            <h1 class="heading">Enquiries & Orders</h1>
+          </div>
+          <button id="admin-refresh" class="secondary-btn" type="button">Refresh</button>
+        </div>
+        <p id="admin-dashboard-status" class="admin-status" role="status" aria-live="polite"></p>
+        <div id="admin-summary" class="admin-summary"></div>
+
+        <section class="admin-record-section">
+          <h2 class="heading">Consultation Requests</h2>
+          <div id="consultations-table" class="admin-table-wrap"></div>
+        </section>
+
+        <section class="admin-record-section">
+          <h2 class="heading">Contact Messages</h2>
+          <div id="messages-table" class="admin-table-wrap"></div>
+        </section>
+
+        <section class="admin-record-section">
+          <h2 class="heading">Order Requests</h2>
+          <div id="orders-table" class="admin-table-wrap"></div>
+          <p class="admin-note">Orders are requests only. This website does not collect online payments.</p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
